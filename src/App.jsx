@@ -4,12 +4,16 @@ import Task from "./components/task.";
 function App() {
   const [component, setcomponent] = useState([]);
 
-  const taskvalue = document.getElementById("taskvalue");
-
+  
   const addComponent = () => {
     setcomponent([...component, <Task key={component.length} />]);
+    const taskvalue = document.getElementById("taskvalue");
     console.log(taskvalue)
-    taskvalue.innerText = "";
+   
+  };
+
+  const removeComponent = (id) => {
+    setcomponent(component.filter((component) => component.id !== id));
   };
 
   return (
@@ -24,8 +28,9 @@ function App() {
           id="taskvalue"
           className="py-3 px-3 w-7/12 mx-32"
           placeholder="Enter Your Task "
-          onChange={(event) => {
-            console.log(event.target.value);
+          onChange = {(event) => {
+            let valueIninput = event.target.value;
+            console.log(event.target.value)
           }}
         />
         <button
@@ -35,7 +40,13 @@ function App() {
           Add Task
         </button>
         <div className="w-full min-h-screen bg-slate-300 flex flex-col items-center py-8">
-          {component}
+        {component.map((component) => (
+          <Task 
+            key={component.id} 
+            id={component.id} 
+            removeComponent={removetask} 
+          />
+        ))}
         </div>
       </div>
     </>
