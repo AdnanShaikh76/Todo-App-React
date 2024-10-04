@@ -3,17 +3,18 @@ import Task from "./components/task.";
 
 function App() {
   const [component, setcomponent] = useState([]);
-
+  const [inputValue, setinputValue] = useState()
   
   const addComponent = () => {
     setcomponent([...component, <Task key={component.length} />]);
-    const taskvalue = document.getElementById("taskvalue");
-    console.log(taskvalue)
-   
+    // inputValue = document.getElementById("taskvalue");
+    // console.log(inputValue)
+    // setinputValue(inputValue)
   };
 
   const removeComponent = (id) => {
-    setcomponent(component.filter((component) => component.id !== id));
+    setcomponent(component.filter((component) => component.id === id));
+    
   };
 
   return (
@@ -44,7 +45,7 @@ function App() {
           <Task 
             key={component.id} 
             id={component.id} 
-            removeComponent={removetask} 
+            removeComponent={removeComponent} 
           />
         ))}
         </div>
