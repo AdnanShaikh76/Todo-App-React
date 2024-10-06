@@ -1,57 +1,38 @@
-import React, { useState } from "react";
-import Task from "./components/task.";
+import React, {useState} from 'react'
+import Navbar from './components/Navbar'
 
 function App() {
-  const [component, setcomponent] = useState([]);
-  const [inputValue, setinputValue] = useState()
-  
-  const addComponent = () => {
-    setcomponent([...component, <Task key={component.length} />]);
-    // inputValue = document.getElementById("taskvalue");
-    // console.log(inputValue)
-    // setinputValue(inputValue)
-  };
 
-  const removeComponent = (id) => {
-    setcomponent(component.filter((component) => component.id === id));
-    
-  };
+  const [todos, setTodos] = useState([])
+  const handleAdd = () => {
+    setTodos([...todos, {todos}])
+  }
+
 
   return (
-    <>
-      <div className="w-full h-screen bg-gray-200 ">
-        <header className="w-full h-20 bg-slate-500 text-yellow-200 text-3xl flex items-center justify-center">
-          To-Do Application
-        </header>
-        <input
-          type="text"
-          name="task"
-          id="taskvalue"
-          className="py-3 px-3 w-7/12 mx-32"
-          placeholder="Enter Your Task "
-          onChange = {(event) => {
-            let valueIninput = event.target.value;
-            console.log(event.target.value)
-          }}
-        />
-        <button
-          className="px-5 py-3 bg-slate-600 rounded-md text-yellow-200 mx-6 my-5"
-          onClick={addComponent}
-        >
-          Add Task
-        </button>
-        <div className="w-full min-h-screen bg-slate-300 flex flex-col items-center py-8">
-        {component.map((component) => (
-          <Task 
-            key={component.id} 
-            id={component.id} 
-            removeComponent={removeComponent} 
-          />
-        ))}
+    <div >
+        <Navbar />
+      <div className='w-full bg-slate-100 min-h-[90vh] flex justify-center'>
+        <div className='w-3/4 h-96 bg-slate-600 my-5 rounded-lg '>
+          <h1 className='text-white text-lg mx-5 my-3'>Write Todo</h1>
+          <input type="text"   className='py-2 mx-5 w-80 rounded-lg'/>
+          <button className='px-3 py-1 bg-slate-200 rounded-lg mx-5 hover:bg-slate-400' onClick={handleAdd}>Add</button>
+          <div className='todos w-full h-full'>
+          <h1 className='text-white text-lg mx-5 my-3'>Your Todos</h1>
+           <div className='w-[90%] py-4 px-2 bg-slate-100 mx-auto flex items-center justify-between'>
+            <h2>Task</h2>
+            <div className='btns'>
+              <button className='px-3 py-1 bg-slate-300 rounded-lg mx-3 hover:bg-slate-400'>Edit</button>
+              <button className='px-3 py-1 bg-slate-300 rounded-lg mx-3 hover:bg-slate-400'>Delete</button>
+            </div>
+          </div> 
+          </div>
         </div>
       </div>
-    </>
-  );
+      
+    </div>
+  )
+
 }
 
-export default App;
+export default App
